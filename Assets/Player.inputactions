@@ -1,0 +1,34 @@
+{
+    "name": "Player",
+    "maps": [
+        {
+            "name": "InLevel",
+            "id": "bf8f8de7-8735-45bf-a212-b428ca1f1fcc",
+            "actions": [
+                {
+                    "name": "TrackMouse",
+                    "type": "PassThrough",
+                    "id": "e8c6cd4f-02c0-4d2c-8c14-04b011ce164a",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c5d5f007-576d-4d68-b356-6f64b8380b74",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TrackMouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
