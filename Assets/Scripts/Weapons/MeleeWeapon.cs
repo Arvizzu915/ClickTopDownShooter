@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class MeleeWeapon : MonoBehaviour, IWeaponBehavior
+public class MeleeWeapon : MonoBehaviour
 {
     public Weapon weaponData;
 
