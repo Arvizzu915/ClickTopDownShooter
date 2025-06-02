@@ -1,22 +1,55 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WeaponHolder : MonoBehaviour
 {
-    private IWeaponBehavior currentWeapon;
+    public Weapon currentWeapon;
 
-    public void EquipWeapon(GameObject weaponPrefab)
+    private float cooldown = 0;
+    private bool attacking = false;
+
+    private Vector2 attackingDirection;
+
+    private void Update()
     {
-        if (currentWeapon != null)
+        if (cooldown > 0f)
         {
-            Destroy((currentWeapon as MonoBehaviour).gameObject);
+            cooldown -= Time.deltaTime;
         }
-
-        GameObject weaponInstance = Instantiate(weaponPrefab, transform);
-        currentWeapon = weaponInstance.GetComponent<IWeaponBehavior>();
+        
+        if (attacking && cooldown <= 0)
+        {
+            UseWeapon(attackingDirection, this);
+        }
     }
 
-    public void UseWeapon(Vector2 direction)
+    public void EquipWeapon(Weapon newWeapon)
     {
-        currentWeapon?.Use(direction);
+        currentWeapon = newWeapon;
+    }
+
+    public void UseWeapon(Vector2 direction, WeaponHolder playerScript)
+    {
+        cooldown = currentWeapon.fireRate;
+        currentWeapon?.Use(direction, playerScript);
+    }
+
+    public void ShootInput(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            attacking = true;
+            Debug.Log(currentWeapon);
+        }
+
+        if (ctx.canceled)
+        {
+            attacking = false;
+        }
+    }
+
+    public void ShootDirection(InputAction.CallbackContext ctx)
+    {
+        attackingDirection = ctx.ReadValue<Vector2>();
     }
 }

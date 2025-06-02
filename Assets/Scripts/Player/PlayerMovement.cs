@@ -9,10 +9,6 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 mouseScreenPos;
 
-    public WeaponHolder weaponHolder;
-    public GameObject rangedWeaponPrefab;
-    public GameObject meleeWeaponPrefab;
-
     private void Awake()
     {
         controls = new Controls();
@@ -32,12 +28,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            weaponHolder.EquipWeapon(rangedWeaponPrefab);
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            weaponHolder.EquipWeapon(meleeWeaponPrefab);
-
         MovePlayer();
     }
 
@@ -59,12 +49,5 @@ public class PlayerMovement : MonoBehaviour
 
     //InputActions
 
-    public void Shoot(InputAction.CallbackContext ctx)
-    {
-        if (ctx.performed)
-        {
-            Debug.Log(ctx.ReadValue<Vector2>());
-            weaponHolder.UseWeapon(ctx.ReadValue<Vector2>());
-        }
-    }
+    
 }
