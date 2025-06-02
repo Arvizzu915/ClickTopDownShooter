@@ -38,6 +38,7 @@ public class WeaponHolder : MonoBehaviour
     {
         if (ctx.performed)
         {
+            
             attacking = true;
             Debug.Log(currentWeapon);
         }
