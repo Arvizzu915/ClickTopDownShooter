@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -21,8 +22,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+
         controls.InLevel.Enable();
-        controls.InLevel.TrackMouse.performed += ctx => mouseScreenPos = ctx.ReadValue<Vector2>();
+        //controls.InLevel.TrackMouse.performed += ctx => mouseScreenPos = ctx.ReadValue<Vector2>();
     }
 
     private void OnDisable()
@@ -38,23 +41,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2))
             weaponHolder.EquipWeapon(meleeWeaponPrefab);
 
-        MovePlayer();
+        
     }
 
-    private void MovePlayer()
+    public void MovePlayer(InputAction.CallbackContext ctx)
     {
-        Vector3 worldPos = mainCamera.ScreenToWorldPoint(mouseScreenPos);
-        worldPos.z = transform.position.z;
-
-        // Get the screen boundaries in world space
-        Vector3 minScreenBounds = mainCamera.ScreenToWorldPoint(Vector3.zero);
-        Vector3 maxScreenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
-
-        // Clamp the position
-        float clampedX = Mathf.Clamp(worldPos.x, minScreenBounds.x, maxScreenBounds.x);
-        float clampedY = Mathf.Clamp(worldPos.y, minScreenBounds.y, maxScreenBounds.y);
-
-        transform.position = new Vector3(clampedX, clampedY, worldPos.z);
+        Vector2 direction = ctx.ReadValue<Vector2>();
+        transform.Translate(new Vector2(3.5f,3.5f)*direction*Time.deltaTime);
     }
 
     //InputActions
