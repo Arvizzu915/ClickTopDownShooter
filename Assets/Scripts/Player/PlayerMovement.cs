@@ -16,8 +16,6 @@ public class PlayerMovement : MonoBehaviour
     Vector2 movementCollision= new Vector2(1,1);
     float speed = .0625f;
     public LayerMask Walls;
-    
-
     private void Awake()
     {
         controls = new Controls();
@@ -45,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2))
             weaponHolder.EquipWeapon(meleeWeaponPrefab);
 
-        
+     
     }
 
     public void MovePlayer(InputAction.CallbackContext ctx)
@@ -64,12 +62,5 @@ public class PlayerMovement : MonoBehaviour
 
     //InputActions
 
-    public void Shoot(InputAction.CallbackContext ctx)
-    {
-        if (ctx.performed)
-        {
-            Debug.Log(ctx.ReadValue<Vector2>());
-            weaponHolder.UseWeapon(ctx.ReadValue<Vector2>());
-        }
-    }
+    
 }

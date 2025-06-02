@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedWeapon : MonoBehaviour, IWeaponBehavior
+public class RangedWeapon : MonoBehaviour
 {
     public Weapon weaponData;
     public Transform muzzle;
@@ -12,6 +12,6 @@ public class RangedWeapon : MonoBehaviour, IWeaponBehavior
         Bullet bullet = BulletPoolManager.Instance.GetBullet();
         bullet.transform.position = muzzle.position;
         bullet.transform.rotation = muzzle.rotation;
-        bullet.Fire(direction, bulletSpeed);
+        bullet.Fire(direction);
     }
 }

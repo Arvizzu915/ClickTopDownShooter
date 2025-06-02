@@ -3,22 +3,15 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Rigidbody2D rb;
-    private float lifetime = 2f;
+    public BulletTypeSO bulletSO;
+    public Rigidbody2D rb;
 
-    private void Awake()
+    public void Fire(Vector2 direction)
     {
-        rb = GetComponent<Rigidbody2D>();
+        bulletSO.Fire(this, direction);
     }
 
-    public void Fire(Vector2 direction, float speed)
-    {
-        gameObject.SetActive(true);
-        rb.linearVelocity = direction.normalized * speed;
-        StartCoroutine(Lifetime(lifetime));
-    }
-
-    IEnumerator Lifetime(float lifetime)
+    public IEnumerator Lifetime(float lifetime)
     {
         yield return new WaitForSeconds(lifetime);
         Deactivate();
@@ -26,11 +19,10 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // hit logic here
-        Deactivate();
+        bulletSO.TriggerEnter(this, other);
     }
 
-    private void Deactivate()
+    public void Deactivate()
     {
         rb.linearVelocity = Vector2.zero;
         gameObject.SetActive(false);
