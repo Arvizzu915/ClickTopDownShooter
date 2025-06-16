@@ -13,8 +13,12 @@ public class PlayerMovement : MonoBehaviour
     Vector2 movementCollision= new Vector2(1,1);
     float speed = .0625f;
     public LayerMask Walls;
+
+    public static PlayerMovement singleton;
+
     private void Awake()
     {
+        singleton = this;
         controls = new Controls();
         mainCamera = Camera.main;
     }
