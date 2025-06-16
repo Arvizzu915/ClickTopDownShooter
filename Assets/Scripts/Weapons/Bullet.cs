@@ -6,6 +6,11 @@ public class Bullet : MonoBehaviour
     public BulletTypeSO bulletSO;
     public Rigidbody2D rb;
 
+    private void Update()
+    {
+        bulletSO.BulletTypeUpdate(this);
+    }
+
     public void Fire(Vector2 direction)
     {
         bulletSO.Fire(this, direction);
@@ -26,5 +31,11 @@ public class Bullet : MonoBehaviour
     {
         rb.linearVelocity = Vector2.zero;
         gameObject.SetActive(false);
+    }
+
+    public void ChangePrefab()
+    {
+        gameObject.GetComponent<SpriteRenderer>().sprite = bulletSO.sprite;
+        gameObject.GetComponent<CircleCollider2D>().radius = bulletSO.colliderRadius;
     }
 }

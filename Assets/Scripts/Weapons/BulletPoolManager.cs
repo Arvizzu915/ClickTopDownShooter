@@ -8,6 +8,8 @@ public class BulletPoolManager : MonoBehaviour
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private int poolSize = 20;
 
+    private BulletTypeSO currentBulletType;
+
     private List<Bullet> pool = new();
 
     private void Awake()
@@ -33,7 +35,22 @@ public class BulletPoolManager : MonoBehaviour
         // Expand pool if needed
         Bullet newBullet = Instantiate(bulletPrefab, transform);
         newBullet.gameObject.SetActive(false);
+        newBullet.bulletSO = currentBulletType;
+        newBullet.ChangePrefab();
         pool.Add(newBullet);
         return newBullet;
+    }
+
+    public void ChangeBulletTypeSO(BulletTypeSO bulletTypeSO)
+    {
+        currentBulletType = bulletTypeSO;
+        foreach (var bullet in pool)
+        {
+            if (!bullet.gameObject.activeInHierarchy)
+            {
+                bullet.bulletSO = bulletTypeSO;
+                bullet.ChangePrefab();
+            }
+        }
     }
 }

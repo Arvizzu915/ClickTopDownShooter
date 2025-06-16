@@ -10,6 +10,11 @@ public class WeaponHolder : MonoBehaviour
 
     private Vector2 attackingDirection;
 
+    private void Start()
+    {
+        EquipWeapon(currentWeapon);
+    }
+
     private void Update()
     {
         if (cooldown > 0f)
@@ -26,12 +31,15 @@ public class WeaponHolder : MonoBehaviour
     public void EquipWeapon(Weapon newWeapon)
     {
         currentWeapon = newWeapon;
+        currentWeapon.ChangeBulletType();
     }
 
     public void UseWeapon(Vector2 direction, WeaponHolder playerScript)
     {
+        if (currentWeapon == null) return;
         cooldown = currentWeapon.fireRate;
-        currentWeapon?.Use(direction, playerScript);
+        currentWeapon.Use(direction, playerScript);
+
     }
 
     public void ShootInput(InputAction.CallbackContext ctx)
@@ -40,7 +48,6 @@ public class WeaponHolder : MonoBehaviour
         {
             
             attacking = true;
-            Debug.Log(currentWeapon);
         }
 
         if (ctx.canceled)

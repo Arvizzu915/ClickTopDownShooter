@@ -7,9 +7,14 @@ public abstract class Weapon : ScriptableObject, IWeapon
     [SerializeField] public Sprite weaponSprite;
     [SerializeField] public float damage;
     [SerializeField] public float fireRate;
-
+    
 
     public abstract void Use(Vector2 direction, WeaponHolder playerScript);
+
+    public virtual void ChangeBulletType()
+    {
+
+    }
 }
 
 
