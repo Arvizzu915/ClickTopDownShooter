@@ -8,7 +8,8 @@ public class BulletBT : BulletTypeSO
     public override void Fire(Bullet bulletScript, Vector2 direction)
     {
         bulletScript.gameObject.SetActive(true);
-        bulletScript.rb.linearVelocity = direction.normalized * speed;
+        Debug.Log("ghghgghgghghg");
+        bulletScript.rb.linearVelocity = direction * speed;
         bulletScript.StartCoroutine(bulletScript.Lifetime(lifetime));
     }
 

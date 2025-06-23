@@ -13,7 +13,7 @@ public abstract class Weapon : ScriptableObject, IWeapon
 
     public virtual void ChangeBulletType()
     {
-
+        //ponle definicion o hazla abstracta
     }
 }
 

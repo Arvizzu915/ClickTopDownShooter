@@ -29,6 +29,7 @@ public class Bullet : MonoBehaviour
 
     public void Deactivate()
     {
+        rb.linearDamping = 0;
         rb.linearVelocity = Vector2.zero;
         gameObject.SetActive(false);
     }
